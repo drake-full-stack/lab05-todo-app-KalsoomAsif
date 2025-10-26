@@ -4,11 +4,11 @@ import "./App.css";
 function App() {
   // ===== Use State Variables =====
   const [tasks, setTasks] = useState([
-  { text: "Project 1", completed: false },
-  { text: "Laundry", completed: false },
-  { text: "Walk Dogs", completed: false },
-  { text: "Clean room", completed: false },
-]);
+    { text: "Project 1", completed: false },
+    { text: "Laundry", completed: false },
+    { text: "Walk Dogs", completed: false },
+    { text: "Clean room", completed: false },
+  ]);
   const [inputValue, setInputValue] = useState("");
 
   // ===== Functions ======
@@ -22,6 +22,16 @@ function App() {
 
   const handleDelete = (indexToDelete) => {
     setTasks(tasks.filter((_, index) => index !== indexToDelete));
+  };
+
+  const handleToggle = (indexToToggle) => {
+    setTasks(
+      tasks.map((task, index) =>
+        index === indexToToggle
+          ? { ...task, completed: !task.completed }
+          : task
+      )
+    );
   };
 
   // ==== JSX that gets returned =====
@@ -54,6 +64,7 @@ function App() {
           </li>
         ))}
       </ul>
+      <button onClick={() => handleToggle(0)}>Test Toggle</button>
     </div>
   );
 }
