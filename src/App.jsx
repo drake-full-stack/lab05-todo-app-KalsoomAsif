@@ -4,11 +4,11 @@ import "./App.css";
 function App() {
   // ===== Use State Variables =====
   const [tasks, setTasks] = useState([
-    "Project 1",
-    "Laundry",
-    "Walk Dogs",
-    "clean room",
-  ]);
+  { text: "Project 1", completed: false },
+  { text: "Laundry", completed: false },
+  { text: "Walk Dogs", completed: false },
+  { text: "clean room", completed: false },
+]);
   const [inputValue, setInputValue] = useState("");
 
   // ===== Functions ======
@@ -16,13 +16,20 @@ function App() {
     e.preventDefault();
 
     if (inputValue.trim()) {
-      setTasks([...tasks, inputValue]);
+      setTasks([...tasks, { text: inputValue, completed: false }]);
     }
     setInputValue("");
   };
   const handleDelete = (indexToDelete) => {
     setTasks(tasks.filter((_, index) => index !== indexToDelete));
   };
+  const handleToggle = (indexToToggle) => {
+  setTasks(
+    tasks.map((t, i) =>
+      i === indexToToggle ? { ...t, completed: !t.completed } : t
+    )
+  );
+};
 
   // ==== JSX that gets returned =====
   return (
@@ -44,7 +51,12 @@ function App() {
       <ul className="task-list">
         {tasks.map((task, index) => (
           <li key={index} className="task-item">
-            <span className="task-text">{task}</span>
+            <span
+              className="task-text"
+              onClick={() => handleToggle(index)}
+            >
+              {task.text}
+            </span>
             <button
               className="delete-button"
               onClick={() => handleDelete(index)}
