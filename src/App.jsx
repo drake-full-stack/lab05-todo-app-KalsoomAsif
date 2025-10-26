@@ -59,7 +59,12 @@ function App() {
         aria-label={`Toggle ${task.text}`}
       />
 
-      <span className="task-text">{task.text}</span>
+      <span
+        className={`task-text ${task.completed ? "completed" : ""}`}
+      >
+        {task.text}
+</span>
+
 
       <button
         className="delete-button"
