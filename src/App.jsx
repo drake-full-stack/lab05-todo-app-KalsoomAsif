@@ -7,29 +7,22 @@ function App() {
   { text: "Project 1", completed: false },
   { text: "Laundry", completed: false },
   { text: "Walk Dogs", completed: false },
-  { text: "clean room", completed: false },
+  { text: "Clean room", completed: false },
 ]);
   const [inputValue, setInputValue] = useState("");
 
   // ===== Functions ======
   const handleAddTask = (e) => {
     e.preventDefault();
-
     if (inputValue.trim()) {
       setTasks([...tasks, { text: inputValue, completed: false }]);
     }
     setInputValue("");
   };
+
   const handleDelete = (indexToDelete) => {
     setTasks(tasks.filter((_, index) => index !== indexToDelete));
   };
-  const handleToggle = (indexToToggle) => {
-  setTasks(
-    tasks.map((t, i) =>
-      i === indexToToggle ? { ...t, completed: !t.completed } : t
-    )
-  );
-};
 
   // ==== JSX that gets returned =====
   return (
@@ -49,33 +42,18 @@ function App() {
       </form>
 
       <ul className="task-list">
-  {tasks.map((task, index) => (
-    <li key={index} className="task-item">
-      <input
-        type="checkbox"
-        className="task-checkbox"
-        checked={task.completed}
-        onChange={() => handleToggle(index)}
-        aria-label={`Toggle ${task.text}`}
-      />
-
-      <span
-        className={`task-text ${task.completed ? "completed" : ""}`}
-      >
-        {task.text}
-</span>
-
-
-      <button
-        className="delete-button"
-        onClick={() => handleDelete(index)}
-        aria-label={`Delete ${task.text}`}
-      >
-        🗑️
-      </button>
-    </li>
-  ))}
-</ul>
+        {tasks.map((task, index) => (
+          <li key={index} className="task-item">
+            <span className="task-text">{task.text}</span>
+            <button
+              className="delete-button"
+              onClick={() => handleDelete(index)}
+            >
+              🗑️
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
