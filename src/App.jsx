@@ -49,23 +49,28 @@ function App() {
       </form>
 
       <ul className="task-list">
-        {tasks.map((task, index) => (
-          <li key={index} className="task-item">
-            <span
-              className="task-text"
-              onClick={() => handleToggle(index)}
-            >
-              {task.text}
-            </span>
-            <button
-              className="delete-button"
-              onClick={() => handleDelete(index)}
-            >
-              🗑️
-            </button>
-          </li>
-        ))}
-      </ul>
+  {tasks.map((task, index) => (
+    <li key={index} className="task-item">
+      <input
+        type="checkbox"
+        className="task-checkbox"
+        checked={task.completed}
+        onChange={() => handleToggle(index)}
+        aria-label={`Toggle ${task.text}`}
+      />
+
+      <span className="task-text">{task.text}</span>
+
+      <button
+        className="delete-button"
+        onClick={() => handleDelete(index)}
+        aria-label={`Delete ${task.text}`}
+      >
+        🗑️
+      </button>
+    </li>
+  ))}
+</ul>
     </div>
   );
 }
