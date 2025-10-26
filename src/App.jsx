@@ -54,17 +54,22 @@ function App() {
       <ul className="task-list">
         {tasks.map((task, index) => (
           <li key={index} className="task-item">
-            <span className="task-text">{task.text}</span>
-            <button
-              className="delete-button"
-              onClick={() => handleDelete(index)}
-            >
-              🗑️
-            </button>
+            <input
+  type="checkbox"
+  checked={task.completed}
+  onChange={() => handleToggle(index)}
+  className="task-checkbox"
+/>
+<span className="task-text">{task.text}</span>
+<button
+  className="delete-button"
+  onClick={() => handleDelete(index)}
+>
+  🗑️
+</button>
           </li>
         ))}
       </ul>
-      <button onClick={() => handleToggle(0)}>Test Toggle</button>
     </div>
   );
 }
